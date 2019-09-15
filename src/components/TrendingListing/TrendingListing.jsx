@@ -58,7 +58,6 @@ export class TrendingListing extends React.Component {
                     author={p.subreddit_name_prefixed}
                     selftext={p.selftext} 
                     onClick={()=>{
-                        
                         this.props.dispatch(setPost(p))
                         this.props.history.push('/post')
                     }}
@@ -73,7 +72,6 @@ export class TrendingListing extends React.Component {
     }
 
     fetchListings(page, direction) {
-
         if(!this.state.isLoading) {
 
             this.setState({isLoading: true}, () => {
@@ -94,7 +92,6 @@ export class TrendingListing extends React.Component {
                 fetch(`https://www.reddit.com/r/trendingsubreddits.json?limit=${PER_PAGE}&count=${page+1}${pagination}`)
                 .then(response => response.json())
                 .then(data => {
-                    console.log('RECEIVED', `https://www.reddit.com/r/trendingsubreddits.json?limit=${PER_PAGE}&count=${page+1}${pagination}`)
                     if(data.data.children.length > 0) {
                         this.props.dispatch(saveData(data.data.children, page, data.data.after, data.data.before))
                         this.setState({ isLoading: false });
